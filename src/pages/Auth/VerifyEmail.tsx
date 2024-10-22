@@ -85,7 +85,7 @@ const VerifyEmail: React.FC = () => {
                 </Typography>
               </Grid>
               <Grid item xs={12} sx={{ py: 3 }}>
-                <Typography variant="h7" textAlign="center">
+                <Typography variant="subtitle1" textAlign="center">
                   Please enter the OTP.
                 </Typography>
               </Grid>
@@ -117,7 +117,7 @@ const VerifyEmail: React.FC = () => {
                   <Grid item xs={12}>
                     <Grid item xs={12}>
                       <Grid item container direction="column" alignItems="center" xs={12}>
-                        <Typography to="#" variant="subtitle1" sx={{ textDecoration: 'none' }} textAlign={'center'}>
+                        <Typography variant="subtitle1" sx={{ textDecoration: 'none' }} textAlign={'center'}>
                           Already verified your email?
                         </Typography>
                       </Grid>

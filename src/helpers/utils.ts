@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 
 export interface AnyObject {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any; // NOSONAR
 }
 
@@ -38,5 +39,5 @@ export const getValueOTP = (obj: AnyObject, key: string): string => {
   const subKeys = keyAfterReplaceRegex.split('.');
   return subKeys.reduce((acc: AnyObject, curr: string | number) => {
     return acc?.[curr] || '';
-  }, obj) as string;
+  }, obj) as unknown as string;
 };

@@ -88,7 +88,7 @@ const ForgotPassword = () => {
                 </Typography>
               </Grid>
               <Grid item xs={12} sx={{ py: 3 }}>
-                <Typography variant="h7" textAlign="center">
+                <Typography variant="subtitle1" textAlign="center">
                   Enter your email address below and we&apos;ll send you a password reset OTP.
                 </Typography>
               </Grid>

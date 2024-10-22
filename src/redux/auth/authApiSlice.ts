@@ -18,14 +18,18 @@ export interface IVerifyEmailForm {
 export interface IResetPasswordForm {
   email: string;
   password: string;
+  confirmPassword: string;
   otpToken: string;
 }
+export type IResetPasswordFormWithoutConfirm = Omit<IResetPasswordForm, 'confirmPassword'>;
 
 export interface ISignUpForm {
   name: string;
   email: string;
+  confirmPassword: string;
   password: string;
 }
+export type ISignUpFormWithoutConfirm = Omit<ISignUpForm, 'confirmPassword'>;
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -37,7 +41,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     signUp: builder.mutation({
-      query: (credentials: ISignUpForm) => ({
+      query: (credentials: ISignUpFormWithoutConfirm) => ({
         url: '/auth/sign-up',
         method: 'POST',
         body: { ...credentials },
@@ -51,7 +55,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     resetPassword: builder.mutation({
-      query: (credentials: IResetPasswordForm) => ({
+      query: (credentials: IResetPasswordFormWithoutConfirm) => ({
         url: '/auth/reset-password',
         method: 'POST',
         body: { ...credentials },

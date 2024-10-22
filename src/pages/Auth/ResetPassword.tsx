@@ -13,6 +13,7 @@ import FormOtpInput from '@/components/Forms/FormOtpInput';
 import { useEmail } from '@/hooks/useEmail';
 
 const initialValues: IResetPasswordForm = {
+  email: '',
   password: '',
   confirmPassword: '',
   otpToken: '',
@@ -29,7 +30,7 @@ const validationSchema = yup.object({
     .label('Password'),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match')
+    .oneOf([yup.ref('password'), undefined], 'Passwords must match')
     .required('Confirm Password is required')
     .label('Confirm Password'),
   otpToken: yup
@@ -53,6 +54,7 @@ const ResetPassword = () => {
 
   const handleSubmit = async (values: IResetPasswordForm, { setSubmitting }: FormikHelpers<IResetPasswordForm>) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { confirmPassword, ...resetPasswordValues } = values;
       const result = await resetPassword({ ...resetPasswordValues, email });
       if (result) {
@@ -108,7 +110,7 @@ const ResetPassword = () => {
                 </Typography>
               </Grid>
               <Grid item xs={12} sx={{ py: 3 }}>
-                <Typography variant="h7" textAlign="center">
+                <Typography variant="subtitle1" textAlign="center">
                   Please enter the OTP and choose your new password.
                 </Typography>
               </Grid>
@@ -147,7 +149,7 @@ const ResetPassword = () => {
                   <Grid item xs={12}>
                     <Grid item xs={12}>
                       <Grid item container direction="column" alignItems="center" xs={12}>
-                        <Typography to="#" variant="subtitle1" sx={{ textDecoration: 'none' }} textAlign={'center'}>
+                        <Typography variant="subtitle1" sx={{ textDecoration: 'none' }} textAlign={'center'}>
                           Did not receive the email? Check your spam filter, or
                         </Typography>
                       </Grid>

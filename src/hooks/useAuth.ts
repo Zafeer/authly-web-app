@@ -1,9 +1,8 @@
-import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { useSnackbar } from 'notistack';
 import {
   IForgotPasswordForm,
   ILoginForm,
-  ISignUpForm,
   IVerifyEmailForm,
   useLoginMutation,
   useLogoutMutation,
@@ -11,7 +10,8 @@ import {
   useVerifyEmailMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
-  IResetPasswordForm,
+  IResetPasswordFormWithoutConfirm,
+  ISignUpFormWithoutConfirm,
 } from '@/redux/auth/authApiSlice';
 import {
   selectCurrentAuthState,
@@ -68,6 +68,17 @@ export default function useAuth() {
   const isLoggedIn = useAppSelector(selectCurrentLoginStatus);
   const authData = useAppSelector(selectCurrentAuthState);
 
+  interface ErrorResponse {
+    data: {
+      message: string;
+    };
+  }
+
+  const handleError = (err: FetchBaseQueryError | ErrorResponse) => {
+    const errorMessage = (err as ErrorResponse)?.data?.message ?? 'An unexpected error occurred';
+    enqueueSnackbar(errorMessage, { variant: 'error' });
+  };
+
   /**
    * Performs login with the provided login form values.
    * @param values - credentials.
@@ -87,7 +98,9 @@ export default function useAuth() {
       }
     } catch (err) {
       if (isFetchBaseQueryError(err) && hasErrorObject(err?.data)) {
-        enqueueSnackbar(`${err?.data?.message}`, { variant: 'error' });
+        handleError(err);
+      } else {
+        enqueueSnackbar('An unexpected error occurred', { variant: 'error' });
       }
       return false;
     }
@@ -97,7 +110,7 @@ export default function useAuth() {
    * Performs sign up with the provided sign up form values.
    * @param values - credentials.
    */
-  const signUp = async (values: ISignUpForm): Promise<boolean> => {
+  const signUp = async (values: ISignUpFormWithoutConfirm): Promise<boolean> => {
     try {
       const response = await signUpApi({
         ...values,
@@ -112,7 +125,9 @@ export default function useAuth() {
       }
     } catch (err) {
       if (isFetchBaseQueryError(err) && hasErrorObject(err?.data)) {
-        enqueueSnackbar(`${err?.data?.message}`, { variant: 'error' });
+        handleError(err);
+      } else {
+        enqueueSnackbar('An unexpected error occurred', { variant: 'error' });
       }
       return false;
     }
@@ -137,8 +152,7 @@ export default function useAuth() {
       }
     } catch (err) {
       if (isFetchBaseQueryError(err) && hasErrorObject(err?.data)) {
-        const errorMessage = err?.data?.message;
-        enqueueSnackbar(errorMessage, { variant: 'error' });
+        handleError(err);
       } else {
         enqueueSnackbar('An unexpected error occurred', { variant: 'error' });
       }
@@ -164,8 +178,7 @@ export default function useAuth() {
       }
     } catch (err) {
       if (isFetchBaseQueryError(err) && hasErrorObject(err?.data)) {
-        const errorMessage = err?.data?.message;
-        enqueueSnackbar(errorMessage, { variant: 'error' });
+        handleError(err);
       } else {
         enqueueSnackbar('An unexpected error occurred', { variant: 'error' });
       }
@@ -177,7 +190,8 @@ export default function useAuth() {
    * Performs reset password.
    * @param values - credentials.
    */
-  const resetPassword = async (values: IResetPasswordForm): Promise<boolean> => {
+
+  const resetPassword = async (values: IResetPasswordFormWithoutConfirm): Promise<boolean> => {
     try {
       const response = await resetPasswordApi({
         ...values,
@@ -191,8 +205,7 @@ export default function useAuth() {
       }
     } catch (err) {
       if (isFetchBaseQueryError(err) && hasErrorObject(err?.data)) {
-        const errorMessage = err?.data?.message;
-        enqueueSnackbar(errorMessage, { variant: 'error' });
+        handleError(err);
       } else {
         enqueueSnackbar('An unexpected error occurred', { variant: 'error' });
       }
@@ -208,7 +221,12 @@ export default function useAuth() {
       await logoutApi(refreshToken).unwrap();
       dispatch(unsetCredentials());
     } catch (err) {
-      console.error(err); // NOSONAR
+      if (isFetchBaseQueryError(err) && hasErrorObject(err?.data)) {
+        handleError(err);
+      } else {
+        enqueueSnackbar('An unexpected error occurred', { variant: 'error' });
+      }
+      return false;
     }
   };
 

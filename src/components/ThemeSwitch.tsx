@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import { useTheme } from '@mui/material/styles';
 import Tooltip from '@mui/material/Tooltip';
 import { ThemeContext } from '@/providers/theme/ThemeProvider';
-import React, { memo, useContext } from 'react';
+import { memo, useContext } from 'react';
 
 const ThemeSwitch = () => {
   const theme = useTheme();

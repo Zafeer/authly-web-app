@@ -1,8 +1,13 @@
-import {Middleware} from '@reduxjs/toolkit';
+import { Middleware } from '@reduxjs/toolkit';
 
-const storageMiddleware: Middleware = store => next => action => {
-  if (action.type === 'auth/setCredentials') {
-    const {accessToken, refreshToken, expires} = action.payload;
+const storageMiddleware: Middleware = () => (next) => (action: unknown) => {
+  const typedAction = action as {
+    type: string;
+    payload: { accessToken: string; refreshToken: string; expires: string };
+  };
+
+  if (typedAction.type === 'auth/setCredentials') {
+    const { accessToken, refreshToken, expires } = typedAction.payload;
 
     // Update localStorage
     localStorage.setItem('accessToken', accessToken);
@@ -10,7 +15,7 @@ const storageMiddleware: Middleware = store => next => action => {
     localStorage.setItem('expires', expires?.toString());
   }
 
-  if (action.type === 'auth/unsetCredentials') {
+  if (typedAction.type === 'auth/unsetCredentials') {
     localStorage.clear();
     sessionStorage.clear();
   }

@@ -1,10 +1,20 @@
-import { InputProps } from '@/components/Input/Input';
-import { FormikValues, useFormikContext } from 'formik';
+import { Box, Typography } from '@mui/material';
+import { useFormikContext, FormikValues } from 'formik';
 import React, { useCallback, useState } from 'react';
 import OtpInput from 'react18-input-otp';
-import { Box, Typography } from '@mui/material';
 
-const FormOtpInput: React.FC<InputProps> = ({ id, disabled, ...rest }) => {
+interface InputProps {
+  id: string;
+  label?: string;
+  copyEnabled?: boolean;
+  errorMessage?: string;
+  startAdornment?: React.ReactNode;
+  endAdornment?: React.ReactNode;
+  onChange?: (val: string) => void;
+  helperText?: string;
+}
+
+const FormOtpInput: React.FC<InputProps> = ({ id, ...rest }) => {
   const { setFieldValue, values } = useFormikContext<FormikValues>();
   const [error, setError] = useState<string | null>(null);
 
@@ -31,11 +41,10 @@ const FormOtpInput: React.FC<InputProps> = ({ id, disabled, ...rest }) => {
         inputStyle={{
           width: '100%',
           margin: '4px',
-          padding: '1vw',
+          padding: '2vh',
           borderRadius: 4,
           border: error ? '1px solid red' : '1px solid #ccc',
         }}
-        disabled={disabled}
         onChange={handleChangeEvent}
         {...rest}
       />

@@ -1,4 +1,4 @@
-import React, {createContext, ReactNode, useContext, useEffect, useState} from 'react';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 const OnlineStatusContext = createContext(true);
 
@@ -21,7 +21,7 @@ const timeout = (time: number, promise: Promise<Response>) => {
 
 const checkOnlineStatus = async () => {
   const controller = new AbortController();
-  const {signal} = controller;
+  const { signal } = controller;
 
   // If the browser has no network connection return offline
   if (!navigator.onLine) return navigator.onLine;
@@ -33,7 +33,7 @@ const checkOnlineStatus = async () => {
       fetch(PING_RESOURCE, {
         method: 'GET',
         signal,
-      }),
+      })
     );
     return true;
   } catch (error) {
@@ -47,7 +47,7 @@ const checkOnlineStatus = async () => {
   return false;
 };
 
-export const OnlineStatusProvider: React.FC<Props> = ({children}) => {
+export const OnlineStatusProvider: React.FC<Props> = ({ children }) => {
   const [onlineStatus, setOnlineStatus] = useState<boolean>(true);
 
   const checkStatus = async () => {
@@ -60,7 +60,7 @@ export const OnlineStatusProvider: React.FC<Props> = ({children}) => {
       setOnlineStatus(false);
     });
 
-    let id: NodeJS.Timer;
+    let id: ReturnType<typeof setInterval>;
     if (process.env.NODE_ENV !== 'development') {
       // Add polling incase of slow connection
       id = setInterval(() => {

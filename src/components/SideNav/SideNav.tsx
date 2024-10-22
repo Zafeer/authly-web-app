@@ -12,13 +12,14 @@ interface Props {
   isPermanent: boolean;
   open: boolean;
   drawerWidth: number;
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   toggleDrawer: React.ReactEventHandler<{}>;
   isAppBarFullWidth: boolean;
 }
 
 const SideNav: React.FC<Props> = ({ isPermanent, drawerWidth, toggleDrawer, open, isAppBarFullWidth }) => {
   const location = useLocation();
-  const [sideNavList, setSideNavList] = useState(sideNavConfig);
+  const [sideNavList] = useState(sideNavConfig);
 
   return (
     <SwipeableDrawer

@@ -2,10 +2,12 @@ import { Form as FormikForm, Formik } from 'formik';
 import { ForwardedRef, forwardRef, ReactNode } from 'react';
 import * as yup from 'yup';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyObject = Record<string, any>; // NOSONAR
 
 interface Props {
   initialValues: AnyObject;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSubmit: (...args: any) => void; // NOSONAR
   validationSchema?: ReturnType<typeof yup.object>;
   id?: string;

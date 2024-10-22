@@ -31,7 +31,7 @@ const validationSchema = yup.object({
     .label('Password'),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match')
+    .oneOf([yup.ref('password'), undefined], 'Passwords must match')
     .required('Confirm Password is required')
     .label('Confirm Password'),
 });
@@ -50,9 +50,13 @@ const SignUp = () => {
 
   const handleSubmit = async (values: ISignUpForm, { setSubmitting }: FormikHelpers<ISignUpForm>) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { confirmPassword, ...signUpValues } = values;
       const emailInput = values?.email?.toLowerCase()?.replace(/\s/g, '');
-      const result = await signUp({ ...signUpValues, email: emailInput });
+      const result = await signUp({
+        ...signUpValues,
+        email: emailInput,
+      });
       if (result) {
         setEmail(emailInput);
         handleNavigation();

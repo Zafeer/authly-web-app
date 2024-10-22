@@ -1,7 +1,7 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Menu, MenuItem, Typography } from '@mui/material';
+import { Menu, MenuItem } from '@mui/material';
 import MuiAppBar from '@mui/material/AppBar';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
@@ -9,13 +9,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/system';
-import sfLogo from '@/assets/logo_a.png';
 import FullScreen from '@/components/FullScreen';
 import useAuth from '@/hooks/useAuth';
 import { memo, useState } from 'react';
 import BackdropLoader from './BackdropLoader/BackdropLoader';
 import Button from './Button';
-import { Link } from 'react-router-dom';
 import DeviceWidthProvider from '@/providers/DeviceWidthProvider';
 
 const MyAppBar = styled(MuiAppBar)(({ theme }) => ({

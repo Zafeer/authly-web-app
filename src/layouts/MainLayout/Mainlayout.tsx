@@ -76,7 +76,7 @@ const Mainlayout = () => {
         isPermanent={isPermanent}
         toggleDrawer={toggleDrawer}
         data-testid="sidenav"
-        userName={userData ? `${userData?.data?.name}` : ''}
+        userName={userData ? `${userData.name}` : ''}
       />
       <SideNav
         isPermanent={isPermanent}

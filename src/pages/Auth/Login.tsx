@@ -11,7 +11,10 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ILoginForm } from '@/redux/auth/authApiSlice';
 import * as yup from 'yup';
 
-const initialValues = {};
+const initialValues = {
+  email: '',
+  password: '',
+};
 
 const validationSchema = yup.object({
   email: yup.string().email('Invalid email format').required().label('Email'),
@@ -85,7 +88,7 @@ const Login = () => {
                 </Typography>
               </Grid>
               <Grid item xs={12} sx={{ py: 2 }}>
-                <Typography variant="h7" textAlign="center">
+                <Typography variant="subtitle1" textAlign="center">
                   Enter your credentials to continue.
                 </Typography>
               </Grid>

@@ -1,11 +1,10 @@
-import FileCopyIcon from '@mui/icons-material/FileCopy';
 import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined';
 import { FormControl, FormHelperText, IconButton, OutlinedInput, OutlinedInputProps, Tooltip } from '@mui/material';
 import InputLabel from '@/components/InputLabel';
 import React, { memo, useCallback } from 'react';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 interface AnyErrorObj {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any; // NOSONAR
 }
 
@@ -22,7 +21,6 @@ export type InputProps = Omit<OutlinedInputProps, 'onChange'> & {
 
 const getEndAdornment = ({
   copyEnabled,
-  value,
   isError,
   endAdornment,
 }: {
@@ -37,11 +35,7 @@ const getEndAdornment = ({
   if (copyEnabled)
     return (
       <Tooltip title="Copy to clipboard">
-        <IconButton sx={{ cursor: 'pointer' }}>
-          <CopyToClipboard text={value?.toString() || ''}>
-            <FileCopyIcon />
-          </CopyToClipboard>
-        </IconButton>
+        <IconButton sx={{ cursor: 'pointer' }}></IconButton>
       </Tooltip>
     );
 };

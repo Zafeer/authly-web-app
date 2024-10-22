@@ -8,21 +8,21 @@ import value from 'assets/scss/_themes.module.scss';
  * @param number - The parameter "number" is a variable that represents a value that we want to check
  * if it contains a number.
  */
-const hasNumber = (number) => new RegExp(/[0-9]/).test(number);
+const hasNumber = (number: string) => new RegExp(/[0-9]/).test(number);
 
 /**
  * The function checks if a given number contains both lowercase and uppercase letters.
  * @param number - The `number` parameter is a value that is being checked for the presence of both
  * lowercase and uppercase letters.
  */
-const hasMixed = (number) => new RegExp(/[a-z]/).test(number) && new RegExp(/[A-Z]/).test(number);
+const hasMixed = (number: string) => new RegExp(/[a-z]/).test(number) && new RegExp(/[A-Z]/).test(number);
 
 /**
  * The function "hasSpecial" checks if a given number contains any special characters.
  * @param number - The parameter "number" is a variable that represents a string or number that you
  * want to check for the presence of special characters.
  */
-const hasSpecial = (number) => new RegExp(/[!#@$%^&*)(+=._-]/).test(number);
+const hasSpecial = (number: string) => new RegExp(/[!#@$%^&*)(+=._-]/).test(number);
 
 /**
  * The function `strengthColor` takes a count as input and returns an object with a label and color
@@ -32,7 +32,7 @@ const hasSpecial = (number) => new RegExp(/[!#@$%^&*)(+=._-]/).test(number);
  * @returns The function `strengthColor` returns an object with two properties: `label` and `color`.
  * The values of these properties depend on the value of the `count` parameter passed to the function.
  */
-export const strengthColor = (count) => {
+export const strengthColor = (count: number) => {
   if (count < 2) return { label: 'Poor', color: value.errorMain };
   if (count < 3) return { label: 'Weak', color: value.warningDark };
   if (count < 4) return { label: 'Normal', color: value.orangeMain };
@@ -49,7 +49,7 @@ export const strengthColor = (count) => {
  * password or a similar type of sensitive information.
  * @returns the number of strength indicators for a given input number.
  */
-export const strengthIndicatorNumFunc = (number) => {
+export const strengthIndicatorNumFunc = (number: string): number => {
   let strengths = 0;
   if (number.length > 5) strengths += 1;
   if (number.length > 7) strengths += 1;
