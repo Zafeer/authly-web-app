@@ -28,10 +28,10 @@ This repo contains the frontend for the EasyGenerator interview assignment.
   - **Prettier** for code formatting
   - **Eslint** for error checking
   - **Vitest** with **Testing Library** for testing components and hooks
-- **Public** and **Private** layouts
-- Basic **authentication** hooks and events
-- **Dark** and **Light** mode
-- FavIcon and Manifest for **PWA**
+  - **Public** and **Private** layouts
+  - Basic **authentication** hooks and events
+  - **Dark** and **Light** mode
+  - FavIcon and Manifest for **PWA**
 
 # Tools/Technologies
 
@@ -43,6 +43,14 @@ This repo contains the frontend for the EasyGenerator interview assignment.
 - Node.js
 - NPM
 - Redux
+
+## Environment Variables 🌍
+
+Default environment variables passed during the Docker build process:
+
+- `APP_API_BASE_URL`: Api Base Url.
+- `AUTH_API_BASE_URL`: Auth Api Base Url (Can be same as app api base url).
+- `ENABLE_SESSION_TIMEOUT`: Boolean true/false to allow session timeout
 
 ## Project setup
 
@@ -81,3 +89,9 @@ Launches the test runner in the interactive watch mode.<br />
 ### `npm run build`
 
 Builds the app for production or local development to the `dist` folder.<br />
+
+## Docker
+
+Prequisites - Install docker
+
+### `docker compose up`
