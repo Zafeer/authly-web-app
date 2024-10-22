@@ -1,50 +1,83 @@
-# React + TypeScript + Vite
+# General
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repo contains the frontend for the EasyGenerator interview assignment.
 
-Currently, two official plugins are available:
+# Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![API Status](https://img.shields.io/website-up-down-green-red/https/authly.zooop.in)
 
-## Expanding the ESLint configuration
+- [Online Demo](https://authly.zooop.in)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Functionality 🛠️
 
-- Configure the top-level `parserOptions` property like this:
+### **Auth Management** 🔐:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- Sign Up User
+- Sign In User
+- Forgot / Reset Password of User
+- Verify Email
+- Refresh token
+
+# Features
+
+- UI/UX
+  - Reusable components
+  - Layouts
+  - Theming (primary/seconday and light/dark)
+  - State management using **Context API** and Redux
+  - **Prettier** for code formatting
+  - **Eslint** for error checking
+  - **Vitest** with **Testing Library** for testing components and hooks
+- **Public** and **Private** layouts
+- Basic **authentication** hooks and events
+- **Dark** and **Light** mode
+- FavIcon and Manifest for **PWA**
+
+# Tools/Technologies
+
+- React
+- Vite
+- Typescript
+- MUI
+- React router
+- Node.js
+- NPM
+- Redux
+
+## Project setup
+
+```bash
+$ npm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## How to use
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. Copy `.env.sample` file into `.env` file
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Compile, Test and Run
+
+In the project directory, you can run:
+
+### `npm run start`
+
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
+
+### `npm run lint`
+
+Checks the code for errors and missing things
+
+### `npm run format`
+
+Formats the code according to `./prettierrc.js` config
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.<br />
+
+### `npm run build`
+
+Builds the app for production or local development to the `dist` folder.<br />
