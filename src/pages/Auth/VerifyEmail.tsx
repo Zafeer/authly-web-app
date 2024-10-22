@@ -8,14 +8,19 @@ import { FormikHelpers } from 'formik';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import FormOtpInput from '@/components/Forms/FormOtpInput';
 import { IVerifyEmailForm } from '@/redux/auth/authApiSlice';
-import * as yup from 'yup';
+// import * as yup from 'yup';
 import { useEmail } from '@/hooks/useEmail';
 
 const initialValues = {};
 
-const validationSchema = yup.object({
-  email: yup.string().email('Invalid email format').required().label('Email'),
-});
+// const validationSchema = yup.object({
+//   email: yup.string().email('Invalid email format').required().label('Email'),
+//   otpToken: yup
+//     .string()
+//     .required('OTP Code is required')
+//     .matches(/^\d{6}$/, 'OTP Code must be exactly 6 digits')
+//     .label('OTP Code'),
+// });
 
 const VerifyEmail: React.FC = () => {
   const { verifyEmail, verifyEmailLoading } = useAuth();
@@ -89,7 +94,7 @@ const VerifyEmail: React.FC = () => {
                   Please enter the OTP.
                 </Typography>
               </Grid>
-              <Form initialValues={initialValues} onSubmit={handleSubmit} validationSchema={validationSchema}>
+              <Form initialValues={initialValues} onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
                   <Grid container item xs={12} justifyContent="center">
                     <Grid item xs={12} sx={{ mt: 3 }}>

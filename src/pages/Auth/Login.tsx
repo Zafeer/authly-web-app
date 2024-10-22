@@ -18,7 +18,14 @@ const initialValues = {
 
 const validationSchema = yup.object({
   email: yup.string().email('Invalid email format').required().label('Email'),
-  password: yup.string().required().label('Password'),
+  password: yup
+    .string()
+    .required('Password is required')
+    .min(8, 'Password must be at least 8 characters')
+    .matches(/[a-zA-Z]/, 'Password must contain at least one letter')
+    .matches(/[0-9]/, 'Password must contain at least one number')
+    .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain at least one special character')
+    .label('Password'),
 });
 
 const Login = () => {
