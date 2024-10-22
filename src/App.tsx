@@ -1,37 +1,32 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import { Grid2, useTheme } from "@mui/material";
-import "./App.css";
+import { useEffect } from 'react';
+import AppRoutes from '@/routes/Routes';
+import { getRouteConfig } from '@/routes/layoutRouteConfig';
+import { fetchConfigData } from '@/redux/config/configThunk';
+import { useAppDispatch } from '@/redux/hooks';
+import useConfig from '@/hooks/useConfig';
+import SessionTimeout from '@/components/SessionTimeout/SessionTimeout';
+import useAuth from '@/hooks/useAuth';
 
 function App() {
-  const [count, setCount] = useState(0);
-  const theme = useTheme();
+  const dispatch = useAppDispatch();
+  const { enableSessionTimeout, expiryTimeInMinute, promptTimeBeforeIdleInMinute } = useConfig().config;
+  const { isLoggedIn } = useAuth();
 
+  useEffect(() => {
+    const dispatchThunk = async () => {
+      await dispatch(fetchConfigData()).unwrap();
+    };
+    dispatchThunk();
+  }, [dispatch]);
   return (
     <>
-      <Grid2 sx={{ bgcolor: theme.palette.primary.main }}>
-        <div>
-          <a href="https://vitejs.dev" target="_blank">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
-        </div>
-        <h1>Vite + React</h1>
-        <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </button>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test HMR
-          </p>
-        </div>
-        <p className="read-the-docs">
-          Click on the Vite and React logos to learn more
-        </p>
-      </Grid2>
+      <AppRoutes routesConfig={getRouteConfig()} />
+      {enableSessionTimeout && isLoggedIn ? (
+        <SessionTimeout
+          expiryTimeInMinute={expiryTimeInMinute}
+          promptTimeBeforeIdleInMinute={promptTimeBeforeIdleInMinute}
+        />
+      ) : null}
     </>
   );
 }

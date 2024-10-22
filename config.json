@@ -1,0 +1,7 @@
+{
+  "appApiBaseUrl": "http://localhost:3010/api/v1",
+  "authApiBaseUrl": "http://localhost:3010/api/v1",
+  "enableSessionTimeout": "true",
+  "expiryTimeInMinute": "5",
+  "promptTimeBeforeIdleInMinute": ""
+}

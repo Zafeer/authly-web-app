@@ -1,15 +1,11 @@
-import { createTheme, ThemeProvider } from "@mui/material";
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
-import "./index.css";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import AppWrapper from './AppWrapper';
 
-const theme = createTheme();
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
-  </StrictMode>
+root.render(
+  <React.StrictMode>
+    <AppWrapper />
+  </React.StrictMode>,
 );
